@@ -8,17 +8,24 @@
   --border-color: #e9ecef;
   --button-bg: #007bff;
   --button-text: #ffffff;
+
+  /* App-specific palette */
+  --ttt-primary: #1976D2;
+  --ttt-secondary: #FFC107;
+  --ttt-accent: #388E3C;
 }
 
 [data-theme="dark"] {
   /* Dark theme colors */
   --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
+  --bg-secondary: #23272F;
   --text-primary: #ffffff;
-  --text-secondary: #61dafb;
   --border-color: #404040;
-  --button-bg: #0056b3;
+  --button-bg: #1976D2;
   --button-text: #ffffff;
+  --ttt-primary: #1976D2;
+  --ttt-secondary: #FFC107;
+  --ttt-accent: #388E3C;
 }
 
 .App {
@@ -26,18 +33,7 @@
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .App-header {
@@ -47,15 +43,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
   position: relative;
-}
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+  padding: 0;
 }
 
 .theme-toggle {
@@ -70,30 +60,127 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.09);
+  z-index: 2;
 }
 
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  opacity: 0.93;
+  background-color: var(--ttt-secondary);
+  color: #232323;
 }
-
 .theme-toggle:active {
-  transform: translateY(0);
+  opacity: 0.85;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tic-tac-toe-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(30,30,30,0.92);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+  padding: 34px 32px 30px;
+  max-width: 400px;
+  min-width: 230px;
+  width: 100vw;
 }
 
-/* Responsive design for mobile */
+/* Title coloring for fun brand palette */
+.game-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 8px rgba(25,118,210,0.08);
+}
+
+/* --- Tic Tac Toe board styles --- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  grid-template-rows: repeat(3, 70px);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.square {
+  background: var(--bg-primary);
+  border: 2px solid var(--ttt-primary);
+  box-shadow: 0 1px 6px rgba(25,118,210,0.10);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--ttt-accent);
+  transition: background 0.23s, color 0.2s, border 0.2s;
+  border-radius: 13px;
+  width: 70px;
+  height: 70px;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.square:focus {
+  border-color: var(--ttt-secondary);
+  box-shadow: 0 2px 12px var(--ttt-secondary);
+}
+.square:disabled {
+  opacity: 0.77;
+  background: #333333;
+  color: var(--ttt-secondary);
+  cursor: default;
+}
+
+.status {
+  margin-bottom: 20px;
+  min-height: 28px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--ttt-secondary);
+  text-shadow: 0 1px 7px #19191922;
+}
+
+.restart-btn {
+  margin: 0;
+  background: var(--ttt-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.09rem;
+  font-weight: 600;
+  padding: 10px 28px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #00000019;
+  transition: background 0.22s, color 0.18s, transform 0.21s;
+}
+.restart-btn:hover {
+  background: var(--ttt-secondary);
+  color: #191919;
+  transform: translateY(-1px) scale(1.037);
+}
+.restart-btn:active {
+  background: var(--ttt-accent);
+  color: #fff;
+}
+
+/* Footer */
+.footer-note {
+  font-size: 1rem;
+  color: var(--text-secondary, #ccc);
+  margin-top: 38px;
+  opacity: 0.77;
+  letter-spacing: .1px;
+  text-align: center;
+  width: 100%;
+}
+
+
+/* --- Responsive Layout --- */
 @media (max-width: 768px) {
   .theme-toggle {
     top: 10px;
@@ -101,4 +188,34 @@
     padding: 8px 16px;
     font-size: 12px;
   }
+  .tic-tac-toe-container {
+    padding: 18px 3vw 15px 3vw;
+    max-width: 99vw;
+    min-width: unset;
+  }
+  .game-title {
+    font-size: 1.34rem;
+    margin-bottom: 12px;
+  }
+  .board {
+    grid-template-columns: repeat(3, 23vw);
+    grid-template-rows: repeat(3, 23vw);
+    gap: 4vw;
+    margin-bottom: 14px;
+  }
+  .square {
+    width: 23vw;
+    height: 23vw;
+    font-size: 2.5rem;
+  }
+  .status {
+    font-size: 1.01rem;
+    margin-bottom: 13px;
+    min-height: 17px;
+  }
+  .restart-btn {
+    font-size: .98rem;
+    padding: 8px 12vw;
+  }
 }
+
